@@ -1,0 +1,115 @@
+<div class="br-mainpanel" style="position: relative;">
+   <div class="br-pagebody">
+      <div class="row row-sm mb-50">
+         <!---->
+         <div class="col-sm-6">
+            <div class="jobProgress">
+               <div class="thumbImage"><img src="assets/images/jobs-in-progress1.png" alt="image"
+                     title="Jobs in progress" /></div>
+               <h3>Jobs in progress</h3>
+               <p>{{JobsProgress}}</p>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="jobProgress bgRed">
+               <div class="thumbImage"><img src="assets/images/previous-jobs1.png" alt="image" title="previous Jobs" />
+               </div>
+               <h3>Completed Jobs</h3>
+               <p>{{JobsCompleted}}</p>
+            </div>
+         </div>
+         <!-- <div class="col-sm-4">
+            <div class="jobProgress bgGreen">
+               <div class="thumbImage"><img src="assets/images/current-jobs1.png" alt="image" title="Current Jobs" />
+               </div>
+               <h3>Halted Jobs</h3>
+               <p>{{JobsHalted}}</p>
+            </div> -->
+         <!-- </div> -->
+         <!---->
+      </div>
+      <div class="row row-sm">
+         <!---->
+         <div class="col-sm-5">
+            <div class="panel-group chatAccordion" id="accordion" role="tablist" aria-multiselectable="true">
+               <div class="panel panel-default whiteBg">
+                  <div class="panel-heading" role="tab" id="headingOne">
+                     <h3 class="panel-title">
+                        <!-- <span class="trashIcon">
+                           <i class="fa fa-trash"></i>
+                        </span> -->
+                        <a data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
+                           aria-controls="collapseOne">
+                           Jobs Stages
+                        </a>
+                     </h3>
+                  </div>
+                  <div id="collapseOne" style="display: block;" *ngIf="pieChartData">
+                     <canvas class="canvasChart" baseChart height="230" max-height="300" [data]="pieChartData"
+                        [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                     </canvas>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-7">
+            <div class="panel-group chatAccordion" id="accordion" role="tablist" aria-multiselectable="true">
+               <div class="panel panel-default whiteBg">
+                  <div class="panel-heading" role="tab" id="headingTwo">
+                     <h3 class="panel-title">
+                        <!-- <span class="trashIcon">
+                           <i class="fa fa-trash"></i>
+                        </span> -->
+                        <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false"
+                           aria-controls="collapseTwo">
+                           Jobs Per Month
+                        </a>
+                     </h3>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse collapse show" role="tabpanel"
+                     aria-labelledby="headingTwo">
+                     <div class="grapgh">
+                        <!-- <img src="assets/images/graph2.png" alt="image" title="graph"/>  -->
+                        <div style="display: block;" *ngIf="loading == false">
+                           <canvas class="canvasChart" baseChart width="400" height="230" max-height="300"
+                              [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                              [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+                              [plugins]="lineChartPlugins">
+                           </canvas>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!---->
+      </div>
+      <!-- <div class="row row-sm">
+       
+         <div class="col-sm-6">
+            <div class="rounded">
+               <h3>Payments Done</h3>
+
+               <progressbar [value]="PaidCount" type="success" [striped]="true">{{PaidCount}}%</progressbar>
+
+            </div>
+         </div>
+
+         <div class="col-sm-6">
+            <div class="rounded">
+               <h3>Payments Due</h3>
+               <progressbar [value]="UnpaidCount" type="warning" [striped]="true">{{UnpaidCount}}%</progressbar>
+            </div>
+         </div>
+       <div class="col-sm-4">
+            <div class="rounded">
+               <h3>Payments Withdraw</h3>
+               <progressbar [value]="44" type="danger" [striped]="true">44%</progressbar>
+            </div>
+         </div> 
+        
+      </div> -->
+   </div>
+</div>

@@ -1,0 +1,212 @@
+<div class="br-mainpanel" style="position: relative;">
+   <div class="br-pagebody">
+      <div class="row row-sm">
+         <!---->
+         <div class="machineBgBreadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item" aria-current="page">Job List</li>
+            </ol>
+         </div>
+         <!---->
+         <div class="machineBg">
+            <!---->
+            <form id="jobListForm" (ngSubmit)="applyFilter(this.jobListForm);" novalidate>
+               <div class="jobListBox">
+                  <div class="jobListBoxInner">
+                     <div class="row">
+
+
+                        <!---->
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Stage</label>
+
+                              <select class="form-control" name="StageId" [(ngModel)]="jobListForm.StageId"
+                                 #stages="ngModel" [value]="jobListForm.StageId">
+                                 <option value="" selected>Select Stage</option>
+                                 <option *ngFor="let stage of stagesList" [value]="stage.StageId">{{stage.Stages}}
+                                 </option>
+                              </select>
+
+                           </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Job Type</label>
+
+                              <select class="form-control" name=" " [(ngModel)]="jobListForm.JobTypeId"
+                                 #jobType="ngModel" [value]="jobListForm.JobType">
+                                 <option value="" selected>Select Job Type</option>
+                                 <option *ngFor="let jobType of JobTypes" [value]="jobType.JobTypeId">
+                                    {{jobType.JobType}}</option>
+                              </select>
+
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Machine Type</label>
+
+                              <select class="form-control" name="MachineTypeId" [(ngModel)]="jobListForm.MachineTypeId"
+                                 #machineType="ngModel" [value]="jobListForm.MachineType">
+                                 <option value="" selected>Select Machine Type</option>
+                                 <option *ngFor="let machineType of getMachineTypes"
+                                    [value]="machineType.MachineTypeId">{{machineType.MachineType}}</option>
+                              </select>
+
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label> Assign to</label>
+
+                              <select class="form-control" name="UserId" [(ngModel)]="jobListForm.UserId"
+                                 #assignTo="ngModel" [value]="jobListForm.AssignTo">
+                                 <option value="" selected>Please Select</option>
+                                 <option *ngFor="let user of userList" [value]="user.UserId">{{user.UserName}}</option>
+                              </select>
+
+                           </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Start Date</label>
+                              <div class="input-group">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
+                                          aria-hidden="true"></i></span>
+                                 </div>
+
+                                 <input class="form-control" #drp="bsDatepicker" bsDatepicker
+                                    [(ngModel)]="jobListForm.StartDate" name="StartDate" autocomplete="off"
+                                    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>End Date</label>
+                              <div class="input-group">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"
+                                          aria-hidden="true"></i></span>
+                                 </div>
+                                 <input class="form-control" #drp="bsDatepicker" bsDatepicker
+                                    [(ngModel)]="jobListForm.EndDate" name="EndDate" autocomplete="off"
+                                    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                           <div class="jobListForm t-50 ">
+                              <span class="checkActive">Completed Jobs</span> <label class="checkbox"><input
+                                    type="checkbox" name="Completed" [(ngModel)]="jobListForm.Completed" /><span
+                                    class="primary"></span></label>
+                           </div>
+                        </div>
+
+                        <div class="col-sm-8">
+                           <div class="jobListForm t-50  rgt">
+                              <button type="submit" class="btn btn-blue">Apply Filters</button>
+                           </div>
+                        </div>
+                        <!---->
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <!---->
+            <div class="hr"></div>
+
+            <sa-custom-datatable [columnsList]="columnsList" (changeTable)="filterGrid($event)">
+               <tr *ngFor="let row of dataList">
+                  <td><a class="hyperlinktag"
+                        (click)="openJobDetailsModal(jobDetailsPopupTemplate,row.JobId)">{{row.JobCode}}</a>
+                  </td>
+                  <td class="ellipse" [title]="row.Stage">{{row.Stage}}</td>
+                  <td class="ellipse" [title]="row.JobTypeName">{{row.JobTypeName}}</td>
+                  <td class="ellipse" [title]="row.MachineTypeName">{{row.MachineTypeName}}</td>
+                  <td class="ellipse" [title]="row.MachineName">{{row.MachineName}}</td>
+                  <!-- <td class="ellipse" [title]="row.Paid">{{row.Paid? 'Paid': 'Unpaid'}}</td> -->
+               </tr>
+            </sa-custom-datatable>
+
+
+         </div>
+
+      </div>
+   </div>
+</div>
+
+
+<ng-template #jobDetailsPopupTemplate>
+   <div class="modal-header">
+      <h4 class="modal-title"> Job Details</h4>
+      <button type="button" class="close" (click)="closeModal()">&times;</button>
+   </div>
+
+   <div class="modal-body">
+      <div class="machineBox">
+         <div class="machineBoxInner" *ngFor="let jobDetail of jobsDocumentdata">
+            <div class="row">
+               <div class="col-sm-6">
+                  <div class="machineForm">
+                     <label><b>Job Code :</b></label>&nbsp;
+                     <label>{{ jobDetail.JobCodeName }}</label>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="machineForm">
+                     <label><b>Job Type :</b></label>&nbsp;
+                     <label>{{ jobDetail.JobTypeName }}</label>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="machineForm">
+                     <label><b>Client :</b></label>&nbsp;
+                     <label>{{ jobDetail.ClientName }}</label>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="machineForm">
+                     <label><b>Start Date :</b></label>&nbsp;
+                     <label>{{ jobDetail.StartDate | date: 'dd/MM/yyyy' }}</label>
+                  </div>
+               </div>
+            </div>
+   
+         </div>
+      </div>
+      <table class="table table-bordered">
+         <thead>
+            <tr>
+               <th>Document Name</th>
+               <th>Created On</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+             
+            <tr *ngIf="!(documentdata?.length > 0)">
+
+               <td colspan="6" class="text-center">No records found</td>
+            </tr>
+            <tr *ngFor="let jobdetailsdata of documentdata">
+           <!-- >>>    {{jobdetailsdata?.DocumentName | json}} -->
+               <td>{{jobdetailsdata?.DocumentName}}</td>
+               <td>{{jobdetailsdata?.CreatedOn | date: 'dd/MM/yyyy'}}</td>
+               <td><a class="fa fa-eye" title="View" target="_blank"
+                     href="{{apiUrl}}{{jobdetailsdata.DocumentPath}}"></a> &nbsp; &nbsp; 
+                  &nbsp; &nbsp; <a class="fa fa-download"
+                     (click)="downloadDocument(jobdetailsdata.DocumentPath)" title="Download"></a> </td>
+            </tr>
+             
+         </tbody>
+      </table>
+   </div>
+</ng-template>

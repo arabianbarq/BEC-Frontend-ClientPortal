@@ -1,0 +1,200 @@
+<div class="br-mainpanel" style="position: relative;">
+   <div class="br-pagebody">
+      <div class="row row-sm">
+         <!---->
+         <div class="machineBg">
+            <!---->
+            <div class="panel-group">
+               <div class="panel panel-default">
+                  <div class="panel-heading">Profile Information
+                     <!-- <div class="editIcon"><i class="fa fa-pencil"></i></div> -->
+                  </div>
+                  <div class="panel-body">
+                     <div class="row">
+                        <div class="col-sm-4">
+                           <div class="profileImage">
+                              <img
+                                 [src]="profilePhoto && profilePhoto != ''? profilePhoto : 'assets/images/profileimage.png'"
+                                 alt="image" title="Upload Profile Photo" *ngIf="!newProfilePhoto.value"
+                                 (click)="newProfilePhoto.click()" />
+                              <img [src]="'data:image/png;base64,' + uploadedPhoto.clientProfilePhoto" alt="image"
+                                 title="{{UserName}}" *ngIf="newProfilePhoto.value" (click)="newProfilePhoto.click()" />
+                           </div>
+                           <div class="profileDesc">
+                              <h2><b>User Name:</b> <span> {{UserName}}</span></h2>
+
+                              <input type="file" style="display: none" accept="image/*" name="upload"
+                                 (change)="imgUpload($event)" #newProfilePhoto />
+                              <a href="javascript:void(0)" (click)="newProfilePhoto.click()"
+                                 *ngIf="!newProfilePhoto.value">Change Photo</a>
+                              <a href="javascript:void(0)" class="btn btn-primary" (click)="uploadProfilePhoto()"
+                                 *ngIf="newProfilePhoto.value">Upload Photo</a>
+                           </div>
+
+                        </div>
+                        <div class="col-sm-7 ml-auto">
+                           <form [formGroup]="ProfileForm">
+                              <div class="row">
+                                 <div class="col-sm-6">
+                                    <div class="machineForm" [ngClass]="{ 'has-error': formErrors.Name }">
+                                       <label> Name</label>
+                                       <div class="input-group">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"
+                                                   aria-hidden="true"></i></span>
+                                          </div>
+                                          <input type="text" class="form-control" placeholder="Name"
+                                             (blur)="LogValidationError()" (keypress)="letterOnly($event)" formControlName="Name" #Name />
+                                       </div> 
+                                       <span class="help-block" *ngIf="formErrors.Name">
+                                          {{ formErrors.Name}}
+                                       </span>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <div class="machineForm" [ngClass]="{ 'has-error': formErrors.Email }">
+                                       <label>Email </label>
+                                       <div class="input-group">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text"><i class="fa fa-envelope"
+                                                   aria-hidden="true"></i></span>
+                                          </div>
+                                          <input type="email" class="form-control" placeholder="abc@gmail.com"
+                                             formControlName="Email" (blur)="LogValidationError()" readonly>
+                                       </div>
+                                       <span class="help-block" *ngIf="formErrors.Email">
+                                          {{ formErrors.Email }}
+                                       </span>
+                                    </div>
+                                 </div>
+
+
+                                 <div class="col-sm-6">
+                                    <div class="machineForm">
+                                       <label>State</label>
+
+                                       <globalcode-dropdown className="form-control" id="globalState"
+                                          placeholder="State" name="State" formControlName="State"
+                                          categoryName="States">
+                                       </globalcode-dropdown>
+
+                                    </div>
+                                 </div>
+
+                                 <div class="col-sm-6">
+                                    <div class="machineForm" [ngClass]="{ 'has-error': formErrors.Phone }">
+                                       <label>Phone Number</label>
+                                       <div class="input-group">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text" id="basic-addon5"><i class="fa fa-phone"
+                                                   aria-hidden="true"></i></span>
+                                          </div>
+                                          <input type="number" class="form-control" placeholder="+91-234-456-56"
+                                             formControlName="Phone" (keypress)="restrictEKey($event, 'phoneNumber')" (blur)="LogValidationError()">
+                                       </div>
+                                       <span class="help-block" *ngIf="formErrors.Phone">
+                                          {{ formErrors.Phone }}
+                                       </span>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-sm-12">
+                                    <div class="machineForm">
+                                       <label>Address</label>
+                                       <div class="input-group">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text" id="basic-addon5"><i class="fa fa-home"
+                                                   aria-hidden="true"></i></span>
+                                          </div>
+                                          <textarea type="text" class="form-control" placeholder="Dubai"
+                                             formControlName="Address" (blur)="LogValidationError()"></textarea>
+                                       </div>
+
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-12">
+                                    <div class="machineForm rgt">
+                                       <button class="btn btn-blue" type="submit" (click)="onSubmit()">Save</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!---->
+            <!-- <div class="machineBg">
+               <div class="panel-group">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">Change Password</div>
+                     <div class="panel-body">
+                        <div class="row">
+                           <div class="col-sm-5">
+                              <div class="thumbImage1">
+                                 <img src="assets/images/lockimage.png" alt="image" title="lock" />
+                              </div>
+                           </div>
+                           <div class="col-sm-7">
+                              <form id="passwordform" #passwordform="ngForm"
+                                 (ngSubmit)="passwordform.valid && changePassword(passwordform);" novalidate>
+                                 <div class="row">
+                                    <div class="col-sm-12">
+                                       <div class="machineForm">
+                                          <label>Old Password</label>
+                                          <input type="password" class="form-control" placeholder="Old Password"
+                                             name="oldPassword" [(ngModel)]="changePasswordForm.oldPassword"
+                                             #old_password="ngModel" required>
+                                          <div *ngIf="passwordform.submitted && !old_password.valid" class="error">
+                                             {{ changePasswordValidationMessage.oldPassword.required }}</div>
+                                       </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                       <div class="machineForm">
+                                          <label>New Password</label>
+                                          <input type="password" class="form-control" placeholder="New Password"
+                                             name="new_password" [(ngModel)]="changePasswordForm.newPassword"
+                                             minlength="8" #new_password="ngModel" required>
+                                          <div *ngIf="passwordform.submitted && new_password.errors?.required"
+                                             class="error">{{ changePasswordValidationMessage.newPassword.required}}
+                                          </div>
+                                          <div
+                                             *ngIf="passwordform.submitted && new_password.errors?.minlength && !new_password.errors?.required"
+                                             class="error">{{ changePasswordValidationMessage.newPassword.minlength}}
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                       <div class="machineForm">
+                                          <label>Confirm Password</label>
+                                          <input type="password" class="form-control" placeholder="Confirm Password"
+                                             name="confirmPassword" [(ngModel)]="changePasswordForm.confirmPassword"
+                                             #confirm="ngModel" appConfirmEqualValidator="new_password" required>
+                                          <div *ngIf="passwordform.submitted && confirm.errors?.required" class="error">
+                                             {{ changePasswordValidationMessage.confirmPassword.required }}</div>
+                                          <div
+                                             *ngIf="passwordform.submitted && confirm.errors?.notEqual && !confirm.errors?.required"
+                                             class="error">
+                                             {{ changePasswordValidationMessage.confirmPassword.notEqual }}
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                       <div class="machineForm rgt">
+                                          <button type="submit" class="btn btn-blue">Update</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div> -->
+         </div>
+         <!---->
+      </div>
+   </div>
+</div>

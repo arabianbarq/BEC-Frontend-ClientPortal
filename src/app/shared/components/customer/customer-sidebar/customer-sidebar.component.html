@@ -1,0 +1,64 @@
+<div class="br-sideleft ps" style="overflow-y: scroll !important;">
+  <div class="profileSidebar">
+     <!-- <div class="profileIcon"><img  [src]="profilePhoto && profilePhoto != ''? profilePhoto : 'assets/images/profileimage.png'" alt="image" title="Profile" /></div> -->
+     <h1>{{UserName}}</h1>
+     <!-- <h2>Businessman</h2> -->
+     <ul>
+        <li><a [routerLink]="['/customer/dashboard']"><img src="assets/images/home1.png" alt="image" title="Home"/></a></li>
+        <!-- <li><a href="#"><img src="assets/images/gear.png" alt="image" title="Settings"/></a></li> -->
+        <li><a [routerLink]="['/customer/profile']"><img src="assets/images/manicon.png" alt="image" title="profile"/></a></li>
+        <li><a (click)="logout()"><img src="assets/images/power.png" alt="image" title="Logout"/></a></li>
+     </ul>
+  </div>
+  <ul class="br-sideleft-menu">
+     <li class="br-menu-item">
+        <a class="br-menu-link active" [routerLink]="['/customer/dashboard']">
+        <img src="assets/images/home.png" alt="image"/>
+        <span class="menu-item-label">Home</span>
+        </a>
+     </li>
+     <li class="br-menu-item">
+        <a  class="br-menu-link" [routerLink]="['/customer/profile']">
+        <img src="assets/images/my-profile.png" alt="image"/>
+        <span class="menu-item-label">My Profile</span>
+        </a>
+     </li>
+     <li class="br-menu-item">
+        <a  class="br-menu-link" [routerLink]="['/customer/jobsinprogress']">
+        <img src="assets/images/current-jobs.png" alt="image"/>
+        <span class="menu-item-label">Jobs</span>
+        </a>
+     </li>
+     <!-- <li class="br-menu-item">
+        <a href="index.html" class="br-menu-link">
+        <img src="assets/images/previous-jobs.png" alt="image"/>
+        <span class="menu-item-label">Preview Jobs</span>
+        </a>
+     </li>
+     <li class="br-menu-item">
+        <a href="index.html" class="br-menu-link">
+        <img src="assets/images/current-jobs.png" alt="image"/>
+        <span class="menu-item-label">Current Jobs</span>
+        </a>
+     </li> -->
+      <li class="br-menu-item">
+         <a href="index.html" class="br-menu-link" [routerLink]="['/customer/add-comment']">
+            <img src="assets/images/comments.png" alt="image" />
+            <span class="menu-item-label">Add Comment</span>
+         </a>
+      </li>
+      <li class="br-menu-item">
+         <a href="index.html" class="br-menu-link" [routerLink]="['/customer/clientReport']">
+            <img src="assets/images/comments.png" alt="image" />
+            <span class="menu-item-label">Client Report</span>
+         </a>
+      </li>
+     <li class="br-menu-item">
+        <a href="index.html" class="br-menu-link"  [routerLink]="['/customer/comments-feedback']">
+        <img src="assets/images/comments.png" alt="image"/>
+        <span class="menu-item-label">Comments and Feedback</span>
+        </a>
+     </li>
+    
+  </ul>
+</div>

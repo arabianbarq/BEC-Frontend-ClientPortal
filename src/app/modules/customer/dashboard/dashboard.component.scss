@@ -1,0 +1,215 @@
+
+
+/*----*/
+html,
+body {
+width: 100%;
+height: 100%;
+background-color: #eee;
+}
+a:hover {
+text-decoration: none;
+background-color: transparent;
+}
+.btn-blue
+{
+background-color:#035b8a;
+border-color: #035b8a;
+color:#fff;
+}
+.btn-blue:hover,.btn-blue:focus
+{
+background-color:#035b8a;
+border-color: #035b8a;
+color:#fff;
+}
+
+
+
+	
+
+
+
+/*-- middle css --*/
+.mtop-30 {
+	margin-top: 30px;
+	}
+	.mb-50 {
+	margin-bottom: 40px;
+	@media screen and (max-width:767px)
+	{
+	margin-bottom:15px;	
+	}
+	}
+	.br-mainpanel {
+	    top: 60px;
+		margin-left: 260px;
+		transition: all 0.2s ease-in-out;
+		background-color: #f5f6fa;
+		height: calc(100vh - 60px);
+		margin-top: 0;
+		overflow: auto;
+	@media screen and (max-width:1023px)
+	{
+	margin-left:0px;
+	}
+	}
+	.br-pagebody {
+	margin-top: 0px;
+	padding: 15px;
+	}
+	.row-sm {
+	margin-left: -10px;
+	margin-right: -10px;
+	}
+	.whiteBg {
+	background-color: #fff;
+	margin: 0 0 10px 0;
+	display: block;
+	padding: 10px;
+	h3 {
+	padding: 12px 2px;
+	font-family: 'open_sansregular';
+	font-size: 21px;
+	border-bottom: 1px solid #eaeaea;
+	color: #121529;
+	position: relative;
+	@media screen and (max-width:1199px)
+	{
+	font-size:17px;	
+	}
+	&:before {
+	content: "";
+	background-color: #4476ff;
+	position: absolute;
+	bottom: 0;
+	width: 74px;
+	height: 1px;
+	left: 0;
+	}
+	a {
+	color: #121529;
+	}
+	}
+	.progress {
+	display: flex;
+	height: 1rem;
+	overflow: hidden;
+	font-size: 0.75rem;
+	background-color: #e9ecef;
+	border-radius: 0.25rem;
+	margin: 18px 0 0 0;
+	}
+	}
+	
+	.grapgh img {
+	max-width: 100%;
+	width: 100%;
+	}
+	.panel-title {
+	& > a {
+	&:before {
+	top: 50%;
+	right: 30px;
+	font-family: FontAwesome;
+	content: "\f068";
+	padding-right: 5px;
+	position: absolute;
+	transform: translateY(-50%);
+	}
+	&.collapsed {
+	&:before {
+	float: right !important;
+	content: "\f067";
+	}
+	}
+	&:hover{
+	text-decoration: none;
+	}
+	&:focus{
+	text-decoration: none;
+	}
+	&.active{
+	text-decoration: none;
+	}
+	}
+	}
+	.trashIcon {
+	position: absolute;
+	right: 9px;
+	}
+	.jobProgress {
+	background-color: #d8bdf3;
+	padding: 15px;
+	position: relative;
+	border-radius: 10px;
+	@media screen and (max-width:767px)
+	{
+	margin: 0 0 20px 0;	
+	}
+	h3 {
+	color: #36006c;
+	font-size: 25px;
+	line-height: normal;
+	margin: 0;
+	font-family: 'open_sansregular';
+	@media screen and (max-width:1199px)
+	{
+	font-size:20px;	
+	}
+	@media screen and (max-width:767px)
+	{
+	font-size:16px;	
+	}
+	}
+	p {
+	color: #36006c;
+	font-size: 60px;
+	line-height: normal;
+	margin: 0;
+	font-family: 'open_sansregular';
+	@media screen and (max-width:1199px)
+	{
+	font-size: 42px;	
+	}
+	
+	}
+	&.bgRed {
+	background-color: #ffb7af;
+	h3 {
+	color: #e86355;
+	}
+	p {
+	color: #e86355;
+	}
+	}
+	&.bgGreen {
+	background-color: #c3f3bd;
+	h3 {
+	color: #5e9458;
+	}
+	p {
+	color: #5e9458;
+	}
+	}
+	}
+	.thumbImage {
+	position: absolute;
+	right: 23px;
+	bottom: 16px;
+	img{
+	max-width: 100%;
+	}
+	@media screen and (max-width:1199px)
+	{
+	width: 21%;	
+	}
+	
+	}
+	.bgColor
+	{
+		background-color: #9899a7;
+	}
+	canvas.canvasChart {
+		max-height: 350px;
+	}

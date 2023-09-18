@@ -1,0 +1,143 @@
+<div class="br-mainpanel" style="position: relative;">
+   <div class="br-pagebody">
+      <div class="row row-sm">
+         <!---->
+         <div class="machineBgBreadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item" aria-current="page">Customer Feedback</li>
+            </ol>
+         </div>
+         <!---->
+         <div class="machineBg">
+            <form id="feedbackFilterForm" (ngSubmit)="applyFilter(feedbackFilterForm);" novalidate>
+               <!---->
+               <div class="jobListBox">
+                  <div class="jobListBoxInner">
+                     <div class="row">
+                        <!---->
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Stage</label>
+                              <select class="form-control" name="StageId" [(ngModel)]="feedbackFilterForm.StageId"
+                                 #stages="ngModel" [value]="feedbackFilterForm.StageId">
+                                 <option value="" selected>Select Stage</option>
+                                 <option *ngFor="let stage of stagesList" [value]="stage.StageId">{{stage.Stages}}
+                                 </option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Job Type</label>
+                              <select class="form-control" name="JobTypeId" [(ngModel)]="feedbackFilterForm.JobTypeId"
+                                 #jobType="ngModel" [value]="feedbackFilterForm.JobType">
+                                 <option value="" selected>Select Job Type</option>
+                                 <option *ngFor="let jobType of JobTypes" [value]="jobType.JobTypeId">
+                                    {{jobType.JobType}}</option>
+                              </select>
+
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Machine Type</label>
+                              <select class="form-control" name="MachineTypeId"
+                                 [(ngModel)]="feedbackFilterForm.MachineTypeId" #machineType="ngModel"
+                                 [value]="feedbackFilterForm.MachineType">
+                                 <option value="" selected>Select Machine Type</option>
+                                 <option *ngFor="let machineType of getMachineTypes"
+                                    [value]="machineType.MachineTypeId">{{machineType.MachineType}}</option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-sm-12">
+                           <div class="jobListForm">
+                              <button type="submit" class="btn btn-blue btnright">Apply Filters</button>&nbsp;
+                           </div>
+                        </div>
+                        <!---->
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <!---->
+            <div class="hr"></div>
+            <!---->
+            <a href="#" class="btn btn-blue btnright mb-10 btn-mr" [routerLink]="['/customer/add-comment']">Add New</a>
+            <!---->
+            <sa-custom-datatable [columnsList]="columnsList" (changeTable)="filterGrid($event)">
+               <tr *ngFor="let row of dataList">
+                  <td class="ellipse" >{{row.JobCode}}</td>
+                  <td class="ellipse">{{row.MachineName}} </td>
+                  <td class="ellipse" >{{row.FeedbackTypeName}}</td>
+                  <td class="ellipse">{{row.FeedbackPriorityName}}</td>
+                  <!-- <td class="ellipse" [title]="row.MachineName">{{row.Feedback}}</td> -->
+                  <!-- <td class="ellipse" [title]="row.Comments">{{row.Comments}}</td> -->
+                  <td class="ellipse" >
+                     <div class="comments">
+                        <span class="feedbackRole">{{row.Feedback}}</span>
+                        <a data-toggle="modal" (click)="commentModal(myModalComments, row)"><i class="fa fa-eye"
+                              aria-hidden="true" [title]="row.Feedback"></i></a>
+                     </div>
+                  </td>
+                  <td align="middle">
+
+                     <div class="cross"><a title="Delete" (click)="deleteComment(row.ClientFeedbackId)"><i
+                              class="fa fa-trash red" aria-hidden="true"></i></a></div>
+                  </td>
+
+               </tr>
+            </sa-custom-datatable>
+            <!---->
+         </div>
+         <!---->
+         <!---->
+      </div>
+   </div>
+</div>
+
+
+<ng-template #myModalComments   >
+   <div class="modal-header">
+      <h4 class="modal-title">Feedback Details</h4>
+      <button type="button" class="close" (click)="closeRoleModal()">&times;</button>
+   </div>
+   <!-- Modal body -->
+   <div class="modal-body" > 
+      <!-- <form name="commentForm" > -->
+      <div class="row">
+       
+         <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="commentsPop">
+               <label>Feedback Type <sup>*</sup></label>
+               <span>{{objectlist.FeedbackTypeName}}</span>
+            </div>
+         </div>
+         <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="commentsPop">
+               <label>Feedback Status <sup>*</sup></label>
+               <span class="commentsMessage">{{objectlist.FeedbackStatusName}}</span>
+            </div>
+         </div>
+         <div class="ccol-xs-12 col-sm-6 col-md-4">
+            <div class="commentsPop">
+               <label>Feedback Priority<sup>*</sup></label>
+               <span>{{objectlist.FeedbackPriorityName}}</span>
+            </div>
+         </div>
+        
+
+         <div class="col-sm-12">
+            <div class="commentsPop1">
+               <label>Feedback </label>
+               <span class="commentsMessageTextarea">{{objectlist.Feedback}}</span>
+            </div>
+         </div>
+      </div>
+      <!-- </form> -->
+   </div>
+   <!-- Modal footer -->
+   <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeRoleModal()">Close</button>
+   </div>
+</ng-template>

@@ -1,0 +1,163 @@
+<div class="br-mainpanel" style="position: relative;">
+   <div class="br-pagebody">
+      <div class="row row-sm">
+         <!---->
+         <div class="machineBgBreadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item" aria-current="page">Customer Feedback</li>
+            </ol>
+         </div>
+         <!---->
+         <div class="machineBg">
+
+
+            <form  #CustomerFeedbackDataForm="ngForm"
+               (ngSubmit)="CustomerFeedbackDataForm.valid && save(CustomerFeedbackDataForm);" novalidate>
+               <!---->
+               <div class="jobListBox">
+                  <h1>Choose Job</h1>
+                  <div class="jobListBoxInner">
+                     <div class="row">
+                        <!---->
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Stage <sup>*</sup></label>
+                              <select class="form-control" name="StageId" [(ngModel)]="customerFeedbackDataForm.StageId"
+                                 #stages="ngModel" [value]="customerFeedbackDataForm.StageId"
+                                 (change)="onChangeDropdown(jobTypes.value,$event.target.value)" >
+                                 <option value="" selected>Select Stage</option>
+                                 <option *ngFor="let stage of stagesList" [value]="stage.StageId">{{stage.Stages}}
+                                 </option>
+                              </select>
+                              <!-- <div *ngIf="customerFeedbackDataForm.submitted  && !stages.valid" class="error">{{
+                           validationMessage.StageId.required }}</div> -->
+                           </div> 
+
+                        </div>
+
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Job Type <sup>*</sup></label>
+                              <select class="form-control" name="JobTypeId"
+                                 [(ngModel)]="customerFeedbackDataForm.JobTypeId" #jobType="ngModel"
+                                 [value]="customerFeedbackDataForm.JobType" #jobTypes="ngModel"
+                                 (change)="onChangeDropdown($event.target.value,stages.value)" >
+                                 <option value="" selected>Select Job Type</option>
+                                 <option *ngFor="let jobType of JobTypes" [value]="jobType.JobTypeId">
+                                    {{jobType.JobType}}</option>
+                              </select>
+                              <!-- <div *ngIf="customerFeedbackDataForm.submitted  && !jobType.valid" class="error">{{
+                           validationMessage.JobTypeId.required }}</div> -->
+                           </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                           <div class="jobListForm">
+                              <label>Job  <sup>*</sup></label>
+                              <select class="form-control" name="JobId" [(ngModel)]="customerFeedbackDataForm.JobId"
+                                 #jobType="ngModel" [value]="customerFeedbackDataForm.Job" #job="ngModel" >
+                                 <option value="" selected>Select Job</option>
+                                 <option *ngFor="let job of JobDetails" [value]="job.JobId">
+                                    {{job.JobCode}}</option>
+                              </select>
+                              <!-- <div *ngIf="customerFeedbackDataForm.submitted  && !job.valid" class="error">{{
+                           validationMessage.JobId.required }}</div> -->
+                           </div>
+                        </div>
+
+
+                     </div>
+
+                     <!---->
+                  </div>
+               </div>
+       
+
+
+
+               <div class="jobListBox">
+                     <h1>Feedback</h1>
+                     <div class="jobListBoxInner">
+                        <div class="row">
+                           <!---->
+                           <div class="col-sm-4">
+                              <div class="jobListForm">
+                                 <label> Type <sup>*</sup></label>
+                                 <globalcode-dropdown className="form-control" id="feedbackType"
+                                    placeholder="Feedback Type" name="FeedbackType"
+                                    [(ngModel)]="customerFeedbackDataForm.FeedbackType"
+                                    [value]="customerFeedbackDataForm.FeedbackType" #type="ngModel"
+                                    categoryName="Feedback Type" required>
+                                 </globalcode-dropdown>
+   
+                                 <div *ngIf="CustomerFeedbackDataForm.submitted  && !type.valid" class="error">{{
+                              validationMessage.FeedbackType.required }}</div>
+                              </div>
+                           </div>
+   
+                           <div class="col-sm-4">
+                              <div class="jobListForm">
+                                 <label> Status <sup>*</sup></label>
+                                 <globalcode-dropdown className="form-control" id="statusType"
+                                    placeholder="Feedback Status" name="FeedbackStatus"
+                                    [(ngModel)]="customerFeedbackDataForm.FeedbackStatus"
+                                    [value]="customerFeedbackDataForm.FeedbackStatus" #status="ngModel"
+                                    categoryName="Feedback Status" required>
+                                 </globalcode-dropdown>
+   
+                                 <div *ngIf="CustomerFeedbackDataForm.submitted  && !type.valid" class="error">{{
+                              validationMessage.FeedbackType.required }}</div>
+                              </div>
+                           </div>
+   
+                           <div class="col-sm-4">
+                              <div class="jobListForm">
+                                 <label> Priority<sup>*</sup></label>
+                                 <globalcode-dropdown className="form-control" id="feedbackPriority"
+                                    placeholder="Feedback Priority" name="FeedbackPriority"
+                                    [(ngModel)]="customerFeedbackDataForm.FeedbackPriority"
+                                    [value]="customerFeedbackDataForm.FeedbackPriority" #priority="ngModel"
+                                    categoryName="Feedback Priority" required>
+                                 </globalcode-dropdown>
+                                 <div *ngIf="CustomerFeedbackDataForm.submitted  && !priority.valid" class="error">{{
+                              validationMessage.FeedbackPriority.required }}</div>
+   
+                              </div>
+                           </div>
+                           <div class="col-sm-12">
+                                 <div class="jobListForm">
+                                    <label> Feedback</label>
+                                    <textarea class="form-control" name="Feedback" maxlength ="500"
+                                       [(ngModel)]="customerFeedbackDataForm.Feedback" #feedback="ngModel"
+                                       required></textarea>
+                                    <div *ngIf="CustomerFeedbackDataForm.submitted  && !feedback.valid" class="error"
+                                       required>{{
+                                    validationMessage.Feedback.required }}</div>
+                                 </div>
+                              </div>
+
+
+                        </div>
+
+                        <!---->
+                     </div>
+                  </div>
+       
+
+            
+                           <div class="jobListForm text-right">
+                              <button type="submit" class="btn btn-blue btnright">Save</button> &nbsp;
+                              <button type="reset" class="btn btn-blue btnright">Cancel</button>
+                           </div>
+                        
+             
+         </form>
+         <!---->
+         <div class="hr"></div>
+         <!---->
+      </div>
+      <!---->
+      <!---->
+   </div>
+</div>
+</div>

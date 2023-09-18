@@ -1,0 +1,24 @@
+
+.dataTables_filter
+{
+float:right;
+margin:0 0 15px 0;
+}
+th{
+    position: relative;
+}
+th.sortable::after {
+    font-family: FontAwesome;
+    content: "\f0dc";
+    position: relative;
+    left: 10px;
+    color: #999;
+  }
+  
+  th.sortable.asc::after {
+    content: "\f0d8";
+  }
+  
+  th.sortable.desc::after {
+    content: "\f0d7";
+  }
